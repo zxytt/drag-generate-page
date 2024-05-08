@@ -1,0 +1,99 @@
+@import './layout.scss';
+@import './app.scss';
+
+// 全局样式
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  background-clip: padding-box;
+  min-height: 28px;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #bbb;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+input[type='search'] {
+  appearance: none;
+}
+input::-webkit-search-cancel-button {
+  display: none;
+}
+:root {
+  --g-box-shadow-color: rgb(0 0 0 / 12%);
+  &.dark {
+    --g-box-shadow-color: rgb(0 0 0 / 72%);
+  }
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background-color: var(--g-app-bg);
+  transition: background-color 0.3s;
+  box-sizing: border-box;
+  font-family: Lato, 'PingFang SC';
+  -webkit-tap-highlight-color: transparent;
+  font-size: $--font-size;
+  &.hidden {
+    overflow: hidden;
+  }
+}
+* {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: thin;
+  //设置滚动条的颜色，针对所有浏览器
+  //顺序为 滚轮颜色  轨道颜色
+  scrollbar-color: #ddd transparent;
+}
+:focus-visible {
+  outline: none;
+}
+
+pre {
+  width: 100%;
+}
+pre code.hljs {
+  max-height: 350px;
+  max-width: 80%;
+}
+.printable {
+  width: 100%;
+  font-size: 12px;
+
+  /* 合并边框 */
+  border-collapse: collapse;
+
+  /* 边框宽度 */
+  border-width: 1px;
+
+  /* 设置边框样式是实线 */
+  border-style: solid;
+  tr {
+    height: 30px;
+  }
+  td {
+    border-color: #dcdfe4;
+    border-width: 1px;
+    border-style: solid;
+    padding: 10px;
+  }
+  th {
+    border-color: #dcdfe4;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #e9ecf0;
+    -webkit-print-color-adjust: exact;
+    font-weight: normal;
+  }
+}
+

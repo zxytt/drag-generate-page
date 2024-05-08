@@ -9,9 +9,9 @@ export default ({ command }) => {
     resolve: {
       alias: {
         '@': resolve('src'),
-        components: resolve('src/components'),
-        images: resolve('src/assets/images'),
-        styles: resolve('src/assets/styles'),
+        '@components': resolve('src/components'),
+        '@images': resolve('src/assets/images'),
+        '@styles': resolve('src/assets/styles'),
       }
     }
   })
