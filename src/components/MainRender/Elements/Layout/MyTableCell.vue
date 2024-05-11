@@ -13,7 +13,7 @@
     }"
   >
     <!--{{ rowIndex }}:{{ colIndex }}-->
-    <render-panel
+    <MainRender
       :active-id="activeId"
       :list="item.children"
       tag="div"
@@ -21,7 +21,7 @@
       :gutter="item.gutter"
       justify="left"
     >
-    </render-panel>
+    </MainRender>
 
     <div class="table-cell-command" v-if="conf.mode === 'designer' && IsActive">
       <el-dropdown trigger="click" @command="handleTableCellCommand" size="small">
@@ -48,7 +48,7 @@
 <script lang="ts" setup name="table-cell">
 import { inject, provide, defineAsyncComponent, computed, reactive } from 'vue'
 
-const RenderPanel = defineAsyncComponent(() => import('../../RenderPanel.vue'))
+import MainRender from '../../../MainRender/index.vue'
 const props = defineProps({
   activeId: String || Number,
   item: Object,

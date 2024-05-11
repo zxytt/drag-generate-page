@@ -11,9 +11,15 @@ dependencies:
   '@vueuse/core':
     specifier: ^10.9.0
     version: 10.9.0(vue@3.4.27)
+  dayjs:
+    specifier: ^1.11.11
+    version: 1.11.11
   element-plus:
     specifier: 2.3.4
     version: 2.3.4(vue@3.4.27)
+  numeral:
+    specifier: ^2.0.6
+    version: 2.0.6
   vue:
     specifier: ^3.4.21
     version: 3.4.27
@@ -965,6 +971,10 @@ packages:
 
   /normalize-wheel-es@1.2.0:
     resolution: {integrity: sha512-Wj7+EJQ8mSuXr2iWfnujrimU35R2W4FAErEyTmJoJ7ucwTn2hOUSsRehMb5RSYkxXGTM7Y9QpvPmp++w5ftoJw==}
+    dev: false
+
+  /numeral@2.0.6:
+    resolution: {integrity: sha512-qaKRmtYPZ5qdw4jWJD6bxEf1FJEqllJrwxCLIm0sQU/A7v2/czigzOb+C2uSiFsa9lBUzeH7M1oK+Q+OLxL3kA==}
     dev: false
 
   /path-parse@1.0.7:

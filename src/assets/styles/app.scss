@@ -280,29 +280,6 @@
 .hand {
   cursor: pointer;
 }
-// 操作按钮栏
-.btn-line,
-.search-btn-line {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  .el-button {
-    margin-left: 10px;
-    border-radius: 4px;
-    height: 28px;
-    font-size: 12px;
-    .btn-icon {
-      margin-right: 4px;
-      font-weight: 300;
-      font-size: 12px;
-      .icon {
-        font-size: 12px;
-        font-weight: 300;
-      }
-    }
-  }
-}
-
 // 定义鼠标hover样式
 .cursor-pointer {
   cursor: pointer;
@@ -313,63 +290,4 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-// span 链接跳转
-.span-link {
-  color: $--color-primary;
-  font-size: $--font-size-min;
-  cursor: pointer;
-}
-//tab卡红点
-.tab-wrapper {
-  :nth-child(2) {
-    &::after {
-      display: block;
-      content: '';
-      height: 0;
-      width: 0;
-      border: 3px solid red;
-      border-radius: 50%;
-      margin-top: -10px;
-    }
-  }
-}
-
-// class='form' 下的el-form 重置css
-.form {
-  .el-form-item__label {
-    padding-right: 0;
-  }
-  .el-select,
-  .el-input {
-    width: 100%;
-  }
-}
-
-// select 下拉自定义样式
-.el-select__popper .el-select-dropdown__item {
-  border-radius: 4px;
-}
-.el-select-dropdown__list {
-  margin: 8px !important;
-  .self-option {
-    margin-bottom: 10px;
-    background: #f5f7fa;
-    border-radius: 4px;
-    padding: 10px;
-    height: auto;
-    line-height: 14px;
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-  .self-option.hover,
-  .self-option:hover {
-    background: #e9f2fe !important;
-  }
-}
-.el-input-number .el-input__inner {
-  margin-left: 30px !important;
-  text-align: left !important;
 }

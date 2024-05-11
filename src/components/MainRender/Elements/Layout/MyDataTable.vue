@@ -11,7 +11,6 @@
 import { inject, provide, defineAsyncComponent } from 'vue'
 import dayjs from 'dayjs'
 import numeral  from 'numeral'
-const RenderPanel = defineAsyncComponent(() => import('../../RenderPanel.vue'))
 
 const props = defineProps({
   activeId: String || Number,

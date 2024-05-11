@@ -1,7 +1,7 @@
 <template>
   <div :class="  className">
     <span  class="component-name" v-if="item.showLabel">{{ item.label }} </span>
-    <render-panel
+    <MainRender
       :active-id="activeId"
       :list="item.children"
       tag="el-row"
@@ -9,14 +9,14 @@
       space="15"
       justify="left"
     >
-    </render-panel>
+    </MainRender>
   </div>
 </template>
 
 <script lang="ts" setup name="my-row">
 import { inject, provide, defineAsyncComponent } from 'vue'
 
-const RenderPanel = defineAsyncComponent(() => import('../../RenderPanel.vue'))
+import MainRender from '../../../MainRender/index.vue'
 
 const props = defineProps({
   activeId: String || Number,

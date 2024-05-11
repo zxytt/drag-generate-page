@@ -3,9 +3,8 @@
 
 <template>
   <el-card v-bind="item"   class="drawing-layout-item" >
-     
     <span  class="component-name" v-if="item.showLabel">{{ item.label }} </span>
-    <render-panel
+    <MainRender
       :active-id="activeId"
       :list="item.children"
       tag="el-row"
@@ -13,14 +12,14 @@
       space="15"
       justify="left"
     >
-    </render-panel>
+    </MainRender>
   </el-card> 
 </template>
 
 <script lang="ts" setup name="my-card">
 import { inject, provide, defineAsyncComponent } from 'vue'
 
-const RenderPanel = defineAsyncComponent(() => import('../../RenderPanel.vue'))
+import MainRender from '../../../MainRender/index.vue'
 
 const props = defineProps({
   activeId: String || Number,

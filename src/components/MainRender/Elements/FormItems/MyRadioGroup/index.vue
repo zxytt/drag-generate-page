@@ -6,8 +6,6 @@
     </template>
   </el-radio-group>
 </template>
-<script lang="ts" setup name="my-radio-group">
-import { reactive } from 'vue'
- 
- 
+<script setup name="my-radio-group">
+import { ref } from 'vue'
 </script>

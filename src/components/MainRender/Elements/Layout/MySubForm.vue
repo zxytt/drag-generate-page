@@ -2,7 +2,7 @@
   <div  :class="className" style="margin-left: 0" v-if="conf.mode === 'designer'" >
     <span class="component-name">{{ item.label }} </span>
 
-    <render-panel 
+    <MainRender
       :active-id="activeId"
       :list="item.children"
       tag="el-row"
@@ -11,7 +11,7 @@
       
       
     >
-    </render-panel>
+    </MainRender>
     
   <div style="text-align: center; background: white; color: #4e79ff; padding: 0.4rem 1rem">
     <el-icon><Plus></Plus></el-icon> {{ item.actionText }}
@@ -21,7 +21,7 @@
 <script lang="ts" setup name="my-sub-form">
 import { inject, provide, defineAsyncComponent } from 'vue'
 
-const RenderPanel = defineAsyncComponent(() => import('../../RenderPanel.vue'))
+import MainRender from '../../../MainRender/index.vue'
 
 const props = defineProps({
   activeId: String || Number,

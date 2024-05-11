@@ -6,8 +6,6 @@
     </template>
   </el-checkbox-group>
 </template>
-<script lang="ts" setup name="my-checkbox-group">
-import { reactive } from 'vue'
- 
- 
-</script>
+<script setup name="my-checkbox-group">
+import { ref } from 'vue'
+</script>  
