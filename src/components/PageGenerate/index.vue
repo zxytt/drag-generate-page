@@ -31,15 +31,22 @@
                   :sort="false"
                   @end="onEnd"
                   :clone="cloneComponent"
+                  class="mb20"
                 >
                   <template #item="{ element, index }">
                     <div
                       :key="index"
-                      class="com-item"
+                      class="com-item mb5"
                       @click="addComponent(element)"
                     >
                       <div class="com-body">
                         {{ element.label }}
+                        <SvgIcon
+                          :icon-class="element.tagIcon"
+                          class="svg-icon"
+                          size="18"
+                          :color="com.color"
+                        />
                       </div>
                     </div>
                   </template>
@@ -260,6 +267,8 @@ provide("activeFormItem", activeFormItem)
     transition: transform 0ms !important;
   }
   .com-body {
+    display: flex;
+    justify-content: space-between;
     padding: 8px 12px;
     background: #fff;
     font-size: 12px;
