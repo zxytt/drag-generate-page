@@ -6,7 +6,8 @@
       :prop="conf.mode === 'designer' ? undefined : item.vModel"
       :required="item.required"
     >
-      <RenderComponent 
+      <RenderComponent
+        @onInput="(event) => (item['defaultValue'] = event)" 
         v-bind="item"
         :item="item"
         :conf="conf"

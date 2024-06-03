@@ -9,5 +9,4 @@ export const formConf = {
     span: 24,
     formBtns: true,
     model: {},
-    mode: 'designer'
   }

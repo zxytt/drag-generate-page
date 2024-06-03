@@ -4,7 +4,7 @@
       <div class="mr10">
         <el-form size="small" label-width="90px">
           <GeneralPropertyPanel :data="activeData" />
-          <AdvancePropertyPanel :data="activeData" />
+          <AdvancePropertyPanel v-if="Object.keys(activeData).length" :data="activeData" />
         </el-form>
       </div>
     </el-tab-pane>

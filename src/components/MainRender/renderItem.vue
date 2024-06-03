@@ -1,5 +1,5 @@
 <template>
-  <div class="drawing-item" @click.native.stop="activeFormItem(item)">
+  <div :class="colClassName" @click.native.stop="activeFormItem(item)">
     <template v-if="conf.mode==='designer'">
       <span class="drawing-item-delete" title="删除" @click="deleteItem(index, parent)">
         <el-icon><Delete /></el-icon>
@@ -8,16 +8,7 @@
         <el-icon><CopyDocument /></el-icon>
       </span>
     </template>
-    <component 
-      v-if="!!components[item.tag]" 
-      :is="components[item.tag]" 
-      v-bind="$attrs" 
-      :item="item" 
-      :conf="conf"
-      :activeId="activeId" 
-    />
     <RenderFormItem 
-      v-else 
       :item="item" 
       :conf="conf"
       :activeId="activeId" 
@@ -36,19 +27,17 @@ const props = defineProps({
   index: String || Number
 })
 
-const components = {}
-const modules = import.meta.glob('./Elements/Layout/*.vue', { eager: true })
-console.log('renderItem-modules', modules);
-for(const path in modules) {
-  let cname = modules[path].default.name
-  components[cname] = modules[path].default
-}
-console.log('renderItem', props.item, components);
-
 const activeFormItem = inject('activeFormItem')
 provide('activeFormItem', activeFormItem)
 // const copyItem = inject('copyItem')
 // const deleteItem = inject('deleteItem')
+
+let colClassName = computed(() => {
+  if(props.conf.mode === 'designer') {
+    return props.activeId === props.item.formId ? 'drawing-item active-form-item' : 'drawing-item'
+  }
+  return ''
+})
 
 </script>
 
@@ -119,5 +108,10 @@ provide('activeFormItem', activeFormItem)
       color: #fff;
     }
   }
+}
+.active-form-item {
+	background: #f6f7ff;
+  border-radius: 6px;
+  outline: 1px solid #38adff !important;
 }
 </style>

@@ -67,11 +67,18 @@
           </div>
           <div class="operate">
             <el-button type="primary" link :icon="Delete">清空</el-button>
-            <el-button type="primary" link :icon="View">预览</el-button>
+            <el-button type="primary" link :icon="View" @click="getData">预览</el-button>
           </div>
         </el-header>
         <el-main :class="['device', state.deviceMode]">
-          <el-form class="drawing-board h100">
+          <el-form 
+            class="drawing-board h100"
+            :size="state.formConf.size"
+            :label-position="state.formConf.labelPosition"
+            :disabled="state.formConf.disabled"
+            :label-width="state.formConf.labelWidth + 'px'"
+            :model="state.formConf.model"
+          >
             <el-scrollbar>
               <MainRender 
                 class="h100 m10"
@@ -109,8 +116,9 @@
 import configs from '../../configs'
 import { Delete, Monitor, Iphone, View } from '@element-plus/icons-vue'
 import Draggable from 'vuedraggable' 
-import MainRender from '../MainRender/index.vue'
-import RightPanel from '../RightPanel/index.vue'
+
+const MainRender = defineAsyncComponent(() => import('../MainRender/index.vue'))
+const RightPanel = defineAsyncComponent(() => import('../RightPanel/index.vue'))
 
 const state = ref({
   activeTabName: 'common',
@@ -131,18 +139,24 @@ const state = ref({
           title: '选择型组件',
           model: configs.selectComponents,
           color: 'var(--el-color-primary)',
-        },
-        {
-          title: '布局型组件',
-          model: configs.layoutComponents,
-          color: 'var(--el-color-danger)',
-        },
+        }
       ]
     },
     {
-      label: '高级组件',
+      label: '业务组件',
       name: 'custom',
-      coms: [],
+      coms: [
+        {
+          title: '输入型组件',
+          model: configs.inputComponents,
+          color: 'var(--el-color-primary)',
+        },
+        {
+          title: '选择型组件',
+          model: configs.selectComponents,
+          color: 'var(--el-color-primary)',
+        }
+      ],
     },
     {
       label: '模板案例',
@@ -155,7 +169,11 @@ const state = ref({
   tempActiveId: null,
   tempActiveData: {},
 })
-
+// 初始化
+const created = () => {
+  state.value.formConf.model = {}
+  state.value.formConf.mode = 'designer'
+}
 ///新增组件 
 const addComponent = ele => {
   const clone = cloneComponent(ele)
@@ -169,34 +187,28 @@ const activeFormItem = ele => {
 }
 // 克隆组件
 const cloneComponent = origin => {
-  // const target = JSON.parse(JSON.stringify(origin))
-  // target.formId = new Date().getTime()
-  // state.value.tempActiveData = target
-  // return target
   const clone = JSON.parse(JSON.stringify(origin))
   clone.formId = new Date().getTime()
   if (!clone.layout) clone.layout = "colFormItem"
   if (clone.layout === "colFormItem") {
+    clone.label = createCmpLabel(clone);
     clone.vModel = `field${clone.formId}`
     clone.placeholder !== undefined && (clone.placeholder += clone.label)
-    state.tempActiveData = clone
+    state.value.tempActiveData = clone
   } else if (clone.layout === "rowFormItem") {
     if (clone.rowType === "table") {
       clone.vModel = `field${clone.formId}`
     }
     clone.componentName = `row${clone.formId}`
-    clone.gutter = state.formConf.gutter
+    clone.gutter = state.value.formConf.gutter
     cloneChildrenOfRowFormItem(clone)
-    state.tempActiveData = clone
+    state.value.tempActiveData = clone
   }
-  return state.tempActiveData
+  return state.value.tempActiveData
 }
-// 拖拽结束
-const onEnd = (obj) => {
-  if(obj.from !== obj.to) {
-    state.value.activeData = state.value.tempActiveData
-    state.value.activeId = state.value.tempActiveId
-  }
+const createCmpLabel = (cmp) => {
+  const len = getSameTagCmpNum(cmp.tag)
+  return len ? cmp.label + len : cmp.label
 }
 const getSameTagCmpNum = (tag) => {
   return state.value.drawList.reduce((count, item) => {
@@ -210,6 +222,13 @@ const getSameTagCmpNum = (tag) => {
     }
     return item.tag === tag ? count + 1 : count
   }, 0)
+};
+// 拖拽结束
+const onEnd = (obj) => {
+  if(obj.from !== obj.to) {
+    state.value.activeData = state.value.tempActiveData
+    state.value.activeId = state.value.tempActiveData.formId
+  }
 }
 //克隆rowformitem子组件
 const cloneChildrenOfRowFormItem = (rowFormItem) => {
@@ -224,16 +243,21 @@ const cloneChildrenOfRowFormItem = (rowFormItem) => {
         clone.placeholder !== undefined && (clone.placeholder += clone.label)
       } else if (clone.layout === "rowFormItem") {
         clone.componentName = `row${clone.formId}`
-        clone.gutter = state.formConf.gutter;
-        cloneChildrenOfRowFormItem(clone);
+        clone.gutter = state.value.formConf.gutter
+        cloneChildrenOfRowFormItem(clone)
       }
-    });
+    })
   }
-};
+}
+const getData = () => {
+  console.log('state', state.value);
+}
 
 provide("activeFormItem", activeFormItem)
 // provide("deleteItem", drawingItemDelete)
 // provide("copyItem", drawingItemCopy)
+
+created()
 
 </script>
 
@@ -345,6 +369,9 @@ provide("activeFormItem", activeFormItem)
         height: 3px;
         background: #5959df;
         z-index: 2;
+      }
+      .svg-icon{
+        display: none;
       }
     }
   }
